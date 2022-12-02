@@ -58,6 +58,3 @@ function part2() {
         console.log("Total calories carried by top 3 elves: " + totalCalories);
     })
 }
-
-
-part2();
