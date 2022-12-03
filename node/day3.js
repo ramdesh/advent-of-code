@@ -69,5 +69,3 @@ function part2() {
         
     })
 }
-console.log(calculatePriorities2(["abb", "ab", "bc"]));
-part2();
