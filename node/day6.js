@@ -1,5 +1,4 @@
 const fs = require('fs');
-const { exit } = require('process');
 
 filePath = '../input/day6.txt';
 
