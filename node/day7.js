@@ -2,24 +2,42 @@ const fs = require('fs');
 
 filePath = '../input/day7.txt';
 
-const getTotalOfFilesUnder1000 = (terminalInput) => {
+class Folder{
+    constructor(name, parentName) {
+        this.name = name;
+        this.parent = parentName;
+        this.totalSize = 0;
+        this.childNames = [];
+    }
+    addToTotalSize(size) {
+        this.totalSize += size;
+    }
+    getParentName() {
+        return this.parentName;
+    }
+    getName() {
+        return this.name;
+    }
+    addChildName(childName) {
+        this.childNames.push(childName);
+    }
+}
+
+const getTotalOfFilesUnder100000 = (terminalInput) => {
     objectTree = [];
     totalSize = 0;
-    currentFolderObject = {name: "", totalSize: 0, children: [], parent: ""};
-    childFolderObject = {name: "", totalSize: 0};
-    previousFolderObject = {name: "", totalSize: 0, children: [], parent: ""};
+    currentFSObject = undefined;
     for(let i in terminalInput) {
         if(terminalInput[i].startsWith("$ cd")) {
             if(terminalInput[i].split(" ")[2] !== "..") {
-                if(currentFolderObject.name !== "") {
-                    objectTree.push(currentFolderObject);
-                }
-                previousFolderObject = currentFolderObject;
-                currentFolderObject = {name: "", totalSize: 0, children: [], parent: ""};
-                currentFolderObject["name"] = terminalInput[i].split(" ")[2];
-                currentFolderObject["parent"] = previousFolderObject.name;
+                currentFolderName = "";
+                if(currentFSObject !== undefined) {
+                    objectTree.push(currentFSObject);
+                    currentFolderName = currentFSObject.getName();
+                }           
+                currentFSObject = new Folder(terminalInput[i].split(" ")[2], currentFolderName);
             } else {
-                currentFolderObject = objectTree.find(folderObject => folderObject.name === currentFolderObject.parent);
+                currentFSObject = objectTree.find(folder => folder.getName() === currentFSObject.getParentName());
             }
         } else if(terminalInput[i].startsWith("$ ls")) {
             for(let j = i; j < terminalInput.length; j++) {
@@ -29,11 +47,10 @@ const getTotalOfFilesUnder1000 = (terminalInput) => {
                 outputParts = terminalInput[j].split(" ");
                 if(parseInt(outputParts[0]) != NaN) {
                     // this is a file
-                    currentFolderObject["totalSize"] += outputParts[0];
+                    currentFSObject.addToTotalSize(outputParts[0]);
                 } else if(outputParts[0] === "dir") {
                     // this is a folder
-                    childFolderObject = {"name": outputParts[1], "parent": currentFolderObject.name, totalSize: 0}
-                    currentFolderObject.children.push(childFolderObject);
+                    currentFSObject.addChildName(outputParts[1]);
                 }
             }
 
@@ -52,7 +69,7 @@ part1 = () => {
 
     readableStream.on('data', (chunk) => {
         split = chunk.split("\n");
-        total = getTotalOfFilesUnder1000(split);
+        total = getTotalOfFilesUnder100000(split);
         
     })
 }
