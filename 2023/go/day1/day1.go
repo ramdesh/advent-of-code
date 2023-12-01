@@ -50,15 +50,15 @@ func Part2(input []string) int {
 	lastNumString := "0"
 
 	for _, badString := range input {
-		stringOne := strings.Replace(badString, "one", "one1one", -1)
-		stringTwo := strings.Replace(stringOne, "two", "two2two", -1)
-		stringThree := strings.Replace(stringTwo, "three", "three3three", -1)
-		stringFour := strings.Replace(stringThree, "four", "four4four", -1)
-		stringFive := strings.Replace(stringFour, "five", "five5five", -1)
-		stringSix := strings.Replace(stringFive, "six", "six6six", -1)
-		stringSeven := strings.Replace(stringSix, "seven", "seven7seven", -1)
-		stringEight := strings.Replace(stringSeven, "eight", "eight8eight", -1)
-		stringNine := strings.Replace(stringEight, "nine", "nine9nine", -1)
+		stringOne := strings.Replace(badString, "one", "o1o", -1)
+		stringTwo := strings.Replace(stringOne, "two", "t2t", -1)
+		stringThree := strings.Replace(stringTwo, "three", "t3t", -1)
+		stringFour := strings.Replace(stringThree, "four", "f4f", -1)
+		stringFive := strings.Replace(stringFour, "five", "f5f", -1)
+		stringSix := strings.Replace(stringFive, "six", "s6s", -1)
+		stringSeven := strings.Replace(stringSix, "seven", "s7", -1)
+		stringEight := strings.Replace(stringSeven, "eight", "e8e", -1)
+		stringNine := strings.Replace(stringEight, "nine", "n9n", -1)
 
 		for _, character := range stringNine {
 			if unicode.IsNumber(character) {
