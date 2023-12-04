@@ -72,7 +72,7 @@ func Part2(input []string) int {
 	for _, cardCount := range cardCounts {
 		totalCards += cardCount
 	}
-	fmt.Println(cardCounts)
+	//fmt.Println(cardCounts)
 	return totalCards
 }
 
