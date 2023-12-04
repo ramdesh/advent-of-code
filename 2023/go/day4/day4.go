@@ -51,13 +51,14 @@ func Part2(input []string) int {
 				if isInArray(winningNumbersStr, cardNum) {
 					if cardNum != "" {
 						matchCount += 1
+
 					}
 				}
 			}
 
 		}
 		for i := (gameNoMinusOne + 1); i <= (gameNoMinusOne + 1 + matchCount); i++ {
-			cardCounts[i] += 1
+			cardCounts[gameNoMinusOne+1+matchCount] += 1
 		}
 		for _, cardCount := range cardCounts {
 			totalCards += cardCount
