@@ -40,6 +40,9 @@ func Part1(input []string) int {
 
 func Part2(input []string) int {
 	cardCounts := map[int]int{}
+	for i := 1; i <= len(input); i++ {
+		cardCounts[i] = 1
+	}
 	totalCards := 0
 	for gameNoMinusOne, line := range input {
 		matchCount := 0
@@ -57,15 +60,19 @@ func Part2(input []string) int {
 			}
 
 		}
-		for i := (gameNoMinusOne + 1); i <= (gameNoMinusOne + 1 + matchCount); i++ {
-			cardCounts[gameNoMinusOne+1+matchCount] += 1
-		}
-		for _, cardCount := range cardCounts {
-			totalCards += cardCount
+		for j := 0; j < cardCounts[gameNoMinusOne+1]; j++ {
+			for i := (gameNoMinusOne + 2); i <= (gameNoMinusOne+1+matchCount) && i <= len(input); i++ {
+				// fmt.Println(fmt.Sprintf("game no minus one: %d", gameNoMinusOne))
+				// fmt.Println(fmt.Sprintf("index: %d", i))
+				cardCounts[i] += 1
+			}
 		}
 
 	}
-
+	for _, cardCount := range cardCounts {
+		totalCards += cardCount
+	}
+	fmt.Println(cardCounts)
 	return totalCards
 }
 
