@@ -6,4 +6,5 @@ use (
 	./2023/go/day2
 	./2023/go/day3
 	./2023/go/day4
+	./2023/go/day5
 )
