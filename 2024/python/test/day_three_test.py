@@ -11,6 +11,6 @@ def test_day_one_part_one():
 
 def test_day_one_part_two():
     raw_input = open("../input/day_three_part_two_test_input.txt").read()
-    expected_output = 0
+    expected_output = 48
     actual_output = day_three_part_two(raw_input)
     assert expected_output == actual_output
